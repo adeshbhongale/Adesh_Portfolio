@@ -1,0 +1,39 @@
+// components/BlurBlob.jsx
+import PropTypes from 'prop-types';
+
+const BlurBlob = ({ position, size }) => {
+    // Destructure position and size with default values
+    const { top, left } = position
+    const { width, height } = size
+
+    return (
+        <div
+            className="absolute"
+            style={{
+                top: '25%',
+                left: '35%',
+                width: '35%',
+                height: '35%',
+                transform: 'translate(-70%)',
+            }}
+        >
+            <div
+                className="w-full h-full bg-purple-500 rounded-full opacity-10 blur-3xl animate-pulse"
+            ></div>
+        </div>
+    );
+};
+
+// Define prop types
+BlurBlob.propTypes = {
+    position: PropTypes.shape({
+        top: PropTypes.string,
+        left: PropTypes.string,
+    }),
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+    }),
+};
+
+export default BlurBlob;
