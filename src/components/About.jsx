@@ -35,7 +35,7 @@ const About = () => {
                         />
                     </h3>
                     <p className="text-base sm:text-lg md:text-lg text-gray-400 mb-10 mt-8 leading-relaxed">
-                        I am a full-stack developer with a passion for building scalable
+                        I am a Full-stack developer with a passion for building scalable
                         web applications. Skilled in both front-end and back-end
                         development, I specialize in the MERN stack and other
                         modern technologies to create seamless user
