@@ -1,5 +1,5 @@
 import Tilt from 'react-parallax-tilt';
-import Typical from 'react-typical';
+import { Typewriter } from 'react-simple-typewriter';
 import profileImage from "../assets/Adesh.png";
 
 const About = () => {
@@ -22,16 +22,14 @@ const About = () => {
                     {/* Skills Heading with Typing Effect */}
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-[#8245ec] leading-tight">
                         <span className="text-white">I am a </span>
-                        <Typical
-                            steps={[
-                                'FullStack Developer', 2000,
-                                'MERN Stack Developer', 2000,
-                                'Software Engineer', 2000,
-                                'Web Developer', 2000,
-                                'Efficient Coder', 2000,
-                            ]}
-                            loop={Infinity}
-                            wrapper="span"
+                        <Typewriter
+                            words={['Full Stack Developer', 'MERN Stack Developer', 'Web Developer', 'Software Engineer', 'Efficient Coder']}
+                            loop={true}
+                            cursor
+                            cursorStyle="|"
+                            typeSpeed={50}
+                            deleteSpeed={50}
+                            delaySpeed={2000}
                         />
                     </h3>
                     <p className="text-base sm:text-lg md:text-lg text-gray-400 mb-10 mt-8 leading-relaxed">
