@@ -54,7 +54,7 @@ Hello! I'm Adesh Bhongale, a passionate software developer with a keen interest 
 ## Contact
 
 - **Email:** adeshbhongale03@gmail.com
-- **LinkedIn:** [linkedin.com/in/adeshbhongale](https://linkedin.com/in/adeshbhongale)
+- **LinkedIn:** [linkedin.com/in/adeshbhongale](nkedin.com/in/adesh-bhongale-58830025b)
 - **GitHub:** [github.com/adeshbhongale](https://github.com/adeshbhongale)
 
 ---
