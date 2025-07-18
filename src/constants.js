@@ -185,7 +185,7 @@ export const projects = [
             "A comprehensive task management web application designed to help users efficiently manage their daily tasks and projects. It features user authentication, task creation, assignment, and progress tracking. Built with React.js, Node.js, MongoDB, and Express.js, it provides a robust platform for productivity enhancement.",
         image: pro,
         tags: ["React Js", "Node Js", "MongoDB", "Express Js", "HTML", "CSS", "JavaScript", "JWT Auth"],
-        github: "https://github.com/adeshbhongale/Pro_Manage_Website",
+        github: "https://github.com/adeshbhongale/Pro-Manage_Website_MERN-Stack",
         webapp: "https://pro-manage-tasks.vercel.app/",
     },
     {
