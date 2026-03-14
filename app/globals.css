@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+section {
+  scroll-margin-top: 84px;
+}
+
+.bg-skills-gradient {
+  background: linear-gradient(180deg, rgba(5, 4, 20, 1) 0%, rgba(10, 8, 34, 1) 100%);
+}
+
+.clip-path-custom {
+  clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%);
+}
+
+.clip-path-custom-2 {
+  clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+}
+
+@media (max-width: 640px) {
+  .clip-path-custom,
+  .clip-path-custom-2 {
+    clip-path: none;
+  }
+}
+
+@keyframes floatY {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 18px rgba(130, 69, 236, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(130, 69, 236, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 18px rgba(130, 69, 236, 0.25);
+  }
+}
+
+.hero-float {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.hero-glow {
+  animation: pulseGlow 3.2s ease-in-out infinite;
+}
+
+.skill-card-motion {
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+.skill-card-motion:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 26px rgba(130, 69, 236, 0.42);
+}
