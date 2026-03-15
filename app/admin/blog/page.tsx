@@ -16,6 +16,7 @@ type BlogPayload = {
 export default function AdminBlogPage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [blogs, setBlogs] = useState<BlogPayload[]>([]);
   const [formData, setFormData] = useState({
@@ -39,6 +40,17 @@ export default function AdminBlogPage() {
   useEffect(() => {
     loadBlogs();
   }, []);
+
+  const uploadImage = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch("/api/upload/image", { method: "POST", body: formData });
+    const payload = await response.json();
+    if (!response.ok || !payload.url) {
+      throw new Error(payload.message || "Unable to upload image");
+    }
+    return payload.url as string;
+  };
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -156,6 +168,29 @@ export default function AdminBlogPage() {
             value={formData.coverImage}
             onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
           />
+          <label className="grid gap-2 text-sm text-slate-300">
+            Upload Cover Image
+            <input
+              type="file"
+              accept="image/*"
+              className="rounded-lg border border-white/10 bg-[#1a1236] p-3"
+              onChange={async (event) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
+                try {
+                  setUploadingImage(true);
+                  const url = await uploadImage(file);
+                  setFormData((prev) => ({ ...prev, coverImage: url }));
+                  setMessage("Blog cover image uploaded");
+                } catch {
+                  setMessage("Unable to upload blog cover image");
+                } finally {
+                  setUploadingImage(false);
+                }
+              }}
+            />
+          </label>
+          <p className="text-xs text-slate-400">Current image URL: {formData.coverImage || "Not set"}</p>
           <input
             className="rounded-lg border border-white/10 bg-[#1a1236] p-3"
             placeholder="Tags comma separated"
@@ -204,6 +239,29 @@ export default function AdminBlogPage() {
                 value={blog.coverImage}
                 onChange={(event) => setBlogs((prev) => prev.map((item, idx) => (idx === index ? { ...item, coverImage: event.target.value } : item)))}
               />
+              <label className="grid gap-2 text-sm text-slate-300">
+                Upload Cover Image
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="w-full rounded-lg border border-white/10 bg-[#1a1236] p-3"
+                  onChange={async (event) => {
+                    const file = event.target.files?.[0];
+                    if (!file) return;
+                    try {
+                      setUploadingImage(true);
+                      const url = await uploadImage(file);
+                      setBlogs((prev) => prev.map((item, idx) => (idx === index ? { ...item, coverImage: url } : item)));
+                      setMessage("Blog cover image uploaded");
+                    } catch {
+                      setMessage("Unable to upload blog cover image");
+                    } finally {
+                      setUploadingImage(false);
+                    }
+                  }}
+                />
+              </label>
+              <p className="text-xs text-slate-400">Current image URL: {blog.coverImage || "Not set"}</p>
               <input
                 className="w-full rounded-lg border border-white/10 bg-[#1a1236] p-3"
                 value={blog.tags.join(", ")}
@@ -236,6 +294,7 @@ export default function AdminBlogPage() {
       </section>
 
       {message ? <p className="text-sm text-gray-300">{message}</p> : null}
+      {uploadingImage ? <p className="text-sm text-blue-300">Uploading image...</p> : null}
     </div>
   );
 }

@@ -1,7 +1,9 @@
 export const getAllowedAdmins = () => [
   process.env.ADMIN_EMAIL_1,
   process.env.ADMIN_EMAIL_2,
+  process.env.ADMIN_EMAIL_3,
   ...(process.env.ADMIN_EMAILS || "").split(","),
+  "adeshbhongale02@gmail.com",
   "adeshbhongale03@gmail.com",
   "admin@gmail.com"
 ].filter((item): item is string => Boolean(item && item.trim().length));
@@ -14,8 +16,8 @@ export const isAllowedAdmin = (email: string) => {
   return normalizedAllowedAdmins().includes(normalized);
 };
 
-export const getAdminPassword = () => process.env.ADMIN_PASSWORD;
-export const isPasswordValid = (password: string) => password === getAdminPassword();
+export const getAdminPassword = () => (process.env.ADMIN_PASSWORD || "Adesh07*@").trim();
+export const isPasswordValid = (password: string) => password.trim() === getAdminPassword();
 
 export const isRequestFromAdmin = (request: Request) => {
   const cookieHeader = request.headers.get("cookie") || "";

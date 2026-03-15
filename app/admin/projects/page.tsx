@@ -17,6 +17,7 @@ type ProjectPayload = {
 export default function AdminProjectsPage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [projects, setProjects] = useState<ProjectPayload[]>([]);
   const [formData, setFormData] = useState({
@@ -40,6 +41,17 @@ export default function AdminProjectsPage() {
   useEffect(() => {
     loadProjects();
   }, []);
+
+  const uploadImage = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch("/api/upload/image", { method: "POST", body: formData });
+    const payload = await response.json();
+    if (!response.ok || !payload.url) {
+      throw new Error(payload.message || "Unable to upload image");
+    }
+    return payload.url as string;
+  };
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -145,6 +157,29 @@ export default function AdminProjectsPage() {
             value={formData.image}
             onChange={(e) => setFormData({ ...formData, image: e.target.value })}
           />
+          <label className="grid gap-2 text-sm text-slate-300">
+            Upload Project Image
+            <input
+              type="file"
+              accept="image/*"
+              className="rounded-lg border border-white/10 bg-[#1a1236] p-3"
+              onChange={async (event) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
+                try {
+                  setUploadingImage(true);
+                  const url = await uploadImage(file);
+                  setFormData((prev) => ({ ...prev, image: url }));
+                  setMessage("Project image uploaded");
+                } catch {
+                  setMessage("Unable to upload project image");
+                } finally {
+                  setUploadingImage(false);
+                }
+              }}
+            />
+          </label>
+          <p className="text-xs text-slate-400">Current image URL: {formData.image || "Not set"}</p>
           <input
             className="rounded-lg border border-white/10 bg-[#1a1236] p-3"
             placeholder="GitHub URL"
@@ -201,6 +236,29 @@ export default function AdminProjectsPage() {
                   setProjects((prev) => prev.map((item, idx) => (idx === index ? { ...item, image: event.target.value } : item)))
                 }
               />
+              <label className="grid gap-2 text-sm text-slate-300">
+                Upload Project Image
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="w-full rounded-lg border border-white/10 bg-[#1a1236] p-3"
+                  onChange={async (event) => {
+                    const file = event.target.files?.[0];
+                    if (!file) return;
+                    try {
+                      setUploadingImage(true);
+                      const url = await uploadImage(file);
+                      setProjects((prev) => prev.map((item, idx) => (idx === index ? { ...item, image: url } : item)));
+                      setMessage("Project image uploaded");
+                    } catch {
+                      setMessage("Unable to upload project image");
+                    } finally {
+                      setUploadingImage(false);
+                    }
+                  }}
+                />
+              </label>
+              <p className="text-xs text-slate-400">Current image URL: {project.image || "Not set"}</p>
               <input
                 className="w-full rounded-lg border border-white/10 bg-[#1a1236] p-3"
                 value={project.github}
@@ -252,6 +310,7 @@ export default function AdminProjectsPage() {
       </section>
 
       {message ? <p className="text-sm text-gray-300">{message}</p> : null}
+      {uploadingImage ? <p className="text-sm text-blue-300">Uploading image...</p> : null}
     </div>
   );
 }

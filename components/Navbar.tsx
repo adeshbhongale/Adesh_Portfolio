@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-transparent"}`}
+      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10"}`}
     >
       <div className="text-white py-4 flex justify-between items-center">
         <Link href="/" className="text-lg font-semibold cursor-pointer">

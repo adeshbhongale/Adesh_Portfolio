@@ -33,7 +33,7 @@ export default async function BlogPage() {
             <article className="mb-10 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-r from-[#1f1542] to-[#120d27]">
               <div className="grid md:grid-cols-2">
                 <div className="relative h-60 md:h-full">
-                  <Image src={featuredPost.coverImage} alt={featuredPost.title} fill className="object-cover" />
+                  <Image src={featuredPost.coverImage} alt={featuredPost.title} fill unoptimized className="object-cover" />
                 </div>
                 <div className="p-8">
                   <p className="text-xs uppercase tracking-wide text-slate-300">{new Date(featuredPost.publishedAt).toLocaleDateString("en-IN")}</p>
@@ -60,7 +60,7 @@ export default async function BlogPage() {
                 key={post.slug}
                 className="group overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#1a1236] to-[#120d27] transition hover:-translate-y-1 hover:border-[#8245ec]"
               >
-                <Image src={post.coverImage} alt={post.title} width={760} height={320} className="h-40 w-full object-cover" />
+                <Image src={post.coverImage} alt={post.title} width={760} height={320} unoptimized className="h-40 w-full object-cover" />
                 <div className="p-6">
                   <p className="mb-2 text-xs uppercase tracking-wide text-slate-300">{new Date(post.publishedAt).toLocaleDateString("en-IN")}</p>
                   <h2 className="mb-2 line-clamp-2 text-xl font-semibold">{post.title}</h2>

@@ -40,6 +40,7 @@ const Work = ({ projects }: { projects: ProjectItem[] }) => {
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   fill
+                  unoptimized
                   className="object-contain p-4"
                 />
               </div>

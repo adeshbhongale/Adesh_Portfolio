@@ -27,7 +27,7 @@ const BlogPreview = ({ blogs }: { blogs: BlogItem[] }) => {
             className="group overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#1a1236] to-[#120d27] transition hover:-translate-y-1 hover:border-[#8245ec]"
           >
             <div className="relative h-40 w-full overflow-hidden">
-              <Image src={post.coverImage} alt={post.title} fill className="object-cover transition duration-300 group-hover:scale-105" />
+              <Image src={post.coverImage} alt={post.title} fill unoptimized className="object-cover transition duration-300 group-hover:scale-105" />
             </div>
             <div className="p-5">
               <p className="mb-2 text-xs uppercase tracking-wide text-slate-300">{new Date(post.publishedAt).toLocaleDateString("en-IN")}</p>

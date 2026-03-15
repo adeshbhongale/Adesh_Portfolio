@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:fresh": "npm run db:reset && npm run build",
+    "build:fresh": "npm run reset && npm run build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "reset": "node --env-file=.env --import tsx scripts/reset-db.ts"
+    "reset": "node --env-file=.env --import tsx scripts/reset-db.ts",
+    "db:reset": "npm run reset"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

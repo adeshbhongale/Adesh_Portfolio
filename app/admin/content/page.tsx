@@ -32,7 +32,7 @@ export default function AdminContentPage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const response = await fetch("/api/content");
+        const response = await fetch("/api/content", { cache: "no-store" });
         const payload = await response.json();
         if (response.ok) {
           setData(payload);

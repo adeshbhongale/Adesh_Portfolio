@@ -4,6 +4,8 @@ import Blog from "@/models/Blog";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   if (!isRequestFromAdmin(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -15,9 +17,12 @@ export async function POST(request: Request) {
     revalidatePath("/blog");
     revalidatePath("/about");
     revalidatePath("/contact");
-    await connectDB();
-    const slugs = await Blog.find({}, { slug: 1 }).lean<{ slug: string }[]>();
-    slugs.forEach((item) => revalidatePath(`/blog/${item.slug}`));
+    try {
+      await connectDB();
+      const slugs = await Blog.find({}, { slug: 1 }).lean<{ slug: string }[]>();
+      slugs.forEach((item) => revalidatePath(`/blog/${item.slug}`));
+    } catch {
+    }
 
     return NextResponse.json({ message: "Cache revalidated. Refresh pages to see updates." }, { headers: { "Cache-Control": "no-store" } });
   } catch {

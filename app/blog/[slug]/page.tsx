@@ -59,8 +59,8 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
     <div className="bg-[#050414] min-h-screen text-white">
       <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
-      <div className="relative pt-20 px-[6vw] md:px-[7vw] lg:px-[12vw]">
-        <article className="mx-auto max-w-5xl py-20">
+      <div className="relative pt-10 px-[6vw] md:px-[7vw] lg:px-[12vw]">
+        <article className="mx-auto max-w-5xl py-10">
           <Link href="/blog" className="mb-8 inline-block text-sm font-semibold text-[#a16aff] hover:text-[#c49cff]">
             ← Back to all posts
           </Link>
@@ -73,7 +73,7 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
               </span>
             ))}
           </div>
-          <Image src={post.coverImage} alt={post.title} width={1280} height={720} className="mb-10 h-auto w-full rounded-2xl object-cover" />
+          <Image src={post.coverImage} alt={post.title} width={800} height={300} unoptimized className="mb-10 h-auto w-full rounded-2xl object-cover" />
           <div className="space-y-5 text-lg leading-relaxed text-gray-200">
             {post.content
               .split("\n")

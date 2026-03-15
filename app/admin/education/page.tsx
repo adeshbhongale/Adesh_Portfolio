@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { EducationItem } from "@/lib/data";
+import { useEffect, useState } from "react";
 
 export default function AdminEducationPage() {
   const panelClass = "rounded-2xl border border-white/10 bg-[#120d27] p-5 md:p-6";
@@ -15,7 +15,7 @@ export default function AdminEducationPage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const response = await fetch("/api/content/education");
+        const response = await fetch("/api/content/education", { cache: "no-store" });
         const payload = await response.json();
         if (response.ok) {
           setItems(payload || []);
@@ -114,6 +114,12 @@ export default function AdminEducationPage() {
                   }}
                 />
               </label>
+              <input
+                className={inputClass}
+                value={item.img}
+                onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, img: e.target.value } : it)))}
+                placeholder="Image URL"
+              />
               <input className={inputClass} value={item.date} onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, date: e.target.value } : it)))} placeholder="Date" />
               <input className={inputClass} value={item.grade} onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, grade: e.target.value } : it)))} placeholder="Grade" />
               <textarea className={inputClass} value={item.desc} onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, desc: e.target.value } : it)))} placeholder="Description" />

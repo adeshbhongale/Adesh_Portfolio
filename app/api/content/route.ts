@@ -5,6 +5,8 @@ import SiteContent from "@/models/SiteContent";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const contentSchema = z.object({
   about: z.object({
     headline: z.string().min(1),
@@ -30,7 +32,7 @@ export async function GET() {
   const content = await getSiteContent();
   return NextResponse.json(content, {
     headers: {
-      "Cache-Control": "s-maxage=31536000, stale-while-revalidate=86400"
+      "Cache-Control": "no-store, max-age=0"
     }
   });
 }

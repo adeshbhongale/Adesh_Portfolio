@@ -1,19 +1,22 @@
 import { isRequestFromAdmin } from "@/lib/admin";
 import { getSiteContent } from "@/lib/content";
+import { aboutData, educationData, skillsInfo } from "@/lib/data";
 import { connectDB, isMongoConfigured } from "@/lib/mongodb";
 import SiteContent from "@/models/SiteContent";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const experienceSchema = z.array(
   z.object({
-    id: z.number(),
-    img: z.string().min(1),
-    role: z.string().min(1),
-    company: z.string().min(1),
-    date: z.string().min(1),
-    desc: z.string().min(1),
-    skills: z.array(z.string())
+    id: z.coerce.number(),
+    img: z.string().trim().min(1),
+    role: z.string().trim().min(1),
+    company: z.string().trim().min(1),
+    date: z.string().trim().min(1),
+    desc: z.string().trim().min(1),
+    skills: z.array(z.string().trim()).default([])
   })
 );
 
@@ -21,7 +24,7 @@ export async function GET() {
   const content = await getSiteContent();
   return NextResponse.json(content.experiences || [], {
     headers: {
-      "Cache-Control": "s-maxage=31536000, stale-while-revalidate=86400"
+      "Cache-Control": "no-store, max-age=0"
     }
   });
 }
@@ -42,9 +45,17 @@ export async function PUT(request: Request) {
     }
 
     await connectDB();
-    await SiteContent.findOneAndUpdate({}, { experiences: parsed.data, updatedAt: new Date() }, { upsert: true });
+    await SiteContent.findOneAndUpdate(
+      {},
+      {
+        $set: { experiences: parsed.data, updatedAt: new Date() },
+        $setOnInsert: { about: aboutData, skills: skillsInfo, educations: educationData }
+      },
+      { upsert: true, runValidators: true, setDefaultsOnInsert: true }
+    );
     return NextResponse.json({ message: "Experiences updated successfully" });
-  } catch {
-    return NextResponse.json({ message: "Unable to update experiences" }, { status: 500 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unable to update experiences";
+    return NextResponse.json({ message }, { status: 500 });
   }
 }

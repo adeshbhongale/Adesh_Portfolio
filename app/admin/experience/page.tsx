@@ -15,7 +15,7 @@ export default function AdminExperiencePage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const response = await fetch("/api/content/experience");
+        const response = await fetch("/api/content/experience", { cache: "no-store" });
         const payload = await response.json();
         if (response.ok) {
           setItems(payload || []);
@@ -114,6 +114,12 @@ export default function AdminExperiencePage() {
                   }}
                 />
               </label>
+              <input
+                className={inputClass}
+                value={item.img}
+                onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, img: e.target.value } : it)))}
+                placeholder="Image URL"
+              />
               <input className={inputClass} value={item.date} onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, date: e.target.value } : it)))} placeholder="Date" />
               <textarea className={inputClass} value={item.desc} onChange={(e) => setItems((prev) => prev.map((it, i) => (i === index ? { ...it, desc: e.target.value } : it)))} placeholder="Description" />
               <input

@@ -1,4 +1,5 @@
 import { aboutData, blogData, educationData, experiencesData, projectsData, skillsInfo } from "@/lib/data";
+import { normalizeStoredImageUrl } from "@/lib/media";
 import { connectDB } from "@/lib/mongodb";
 import Blog, { BlogDocument } from "@/models/Blog";
 import Project, { ProjectDocument } from "@/models/Project";
@@ -64,7 +65,7 @@ export const getProjects = async () => {
       _id: String(item._id),
       title: item.title,
       description: item.description,
-      image: item.image,
+      image: normalizeStoredImageUrl(item.image, "/assets/work_logo/pro.png"),
       tags: item.techStack || [],
       github: item.github,
       webapp: item.live,
@@ -81,7 +82,7 @@ export const getProjects = async () => {
         id: item.id,
         title: item.title,
         description: item.description,
-        image: item.image,
+        image: normalizeStoredImageUrl(item.image, "/assets/work_logo/pro.png"),
         tags: item.techStack || item.tags,
         github: item.github,
         webapp: item.webapp,
@@ -111,7 +112,7 @@ export const getBlogs = async () => {
       slug: item.slug,
       content: item.content,
       excerpt: item.excerpt,
-      coverImage: item.coverImage,
+      coverImage: normalizeStoredImageUrl(item.coverImage, "/assets/blog/blog-nextjs.jpg"),
       tags: item.tags || [],
       publishedAt: new Date(item.publishedAt).toISOString()
     }));
@@ -135,7 +136,7 @@ export const getBlogBySlug = async (slug: string) => {
       slug: item.slug,
       content: item.content,
       excerpt: item.excerpt,
-      coverImage: item.coverImage,
+      coverImage: normalizeStoredImageUrl(item.coverImage, "/assets/blog/blog-nextjs.jpg"),
       tags: item.tags || [],
       publishedAt: new Date(item.publishedAt).toISOString()
     };
@@ -174,10 +175,19 @@ export const getSiteContent = async () => {
             ]
           : [{ ...univoluteTemplate, id: maxId + 1 }, ...currentExperiences];
     return {
-      about: content.about,
+      about: {
+        ...content.about,
+        image: normalizeStoredImageUrl(content.about?.image || "", "/assets/Adesh.png")
+      },
       skills: content.skills || [],
-      experiences,
-      educations: content.educations || []
+      experiences: experiences.map((item) => ({
+        ...item,
+        img: normalizeStoredImageUrl(item.img, "/assets/company_logo/ydcoders.png")
+      })),
+      educations: (content.educations || []).map((item) => ({
+        ...item,
+        img: normalizeStoredImageUrl(item.img, "/assets/education_logo/kit.png")
+      }))
     };
   } catch {
     return {
