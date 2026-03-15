@@ -1,11 +1,11 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { getBlogBySlug, getBlogs } from "@/lib/content";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { getBlogBySlug, getBlogs } from "@/lib/content";
 import Link from "next/link";
 
-export const revalidate = false;
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const blogs = await getBlogs();
@@ -39,7 +39,7 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
   const post = await getBlogBySlug(params.slug);
   if (!post) {
     return (
-      <div className="bg-[#050414] min-h-screen text-white pt-40 px-[12vw]">
+      <div className="bg-[#050414] min-h-screen text-white pt-10 px-[12vw]">
         <h1 className="text-3xl font-bold">Post not found</h1>
       </div>
     );
@@ -57,9 +57,9 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
 
   return (
     <div className="bg-[#050414] min-h-screen text-white">
+      <Navbar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
       <div className="relative pt-20 px-[6vw] md:px-[7vw] lg:px-[12vw]">
-        <Navbar />
         <article className="mx-auto max-w-5xl py-20">
           <Link href="/blog" className="mb-8 inline-block text-sm font-semibold text-[#a16aff] hover:text-[#c49cff]">
             ← Back to all posts

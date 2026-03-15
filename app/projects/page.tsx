@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Work from "@/components/Work";
 import { getProjects } from "@/lib/content";
 
-export const revalidate = false;
+export const dynamic = "force-static";
 
 export default async function ProjectsPage() {
   const projects = await getProjects();

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const revalidate = false;
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Blog | Adesh Bhongale",
@@ -18,8 +18,8 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#050414] text-white">
-      <div className="relative pt-20 px-[6vw] md:px-[7vw] lg:px-[12vw]">
-        <Navbar />
+      <Navbar />
+      <div className="relative pt-15 px-[6vw] md:px-[7vw] lg:px-[12vw]">
         <section className="mx-auto max-w-6xl py-20">
           <div className="mb-12">
             <p className="text-sm uppercase tracking-[0.3em] text-[#a16aff]">Engineering Journal</p>

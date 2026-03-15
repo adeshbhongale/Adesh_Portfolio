@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { ProjectItem } from "@/lib/data";
 import ProjectCard from "@/components/ProjectCard";
+import { ProjectItem } from "@/lib/data";
 import Image from "next/image";
+import { useState } from "react";
 
 const Work = ({ projects }: { projects: ProjectItem[] }) => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -25,40 +25,40 @@ const Work = ({ projects }: { projects: ProjectItem[] }) => {
       </div>
 
       {selectedProject && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4">
-          <div className="bg-gray-900 rounded-xl shadow-2xl lg:w-full w-[60%] max-w-3xl overflow-hidden relative">
-            <div className="flex justify-end p-4">
-              <button onClick={() => setSelectedProject(null)} className="text-white text-3xl font-bold hover:text-purple-500">
-                &times;
-              </button>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="w-full flex justify-center bg-gray-900 px-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#121025] shadow-2xl">
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute right-4 top-4 rounded-full border border-white/20 px-3 py-1 text-sm text-slate-200 hover:bg-white/10"
+              aria-label="Close project detail"
+            >
+              Close
+            </button>
+            <div className="grid gap-0 md:grid-cols-2">
+              <div className="relative h-60 md:h-full bg-[#0e0b1f]">
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  width={1200}
-                  height={800}
-                  className="lg:w-full w-[95%] object-contain rounded-xl shadow-2xl"
+                  fill
+                  className="object-contain p-4"
                 />
               </div>
-              <div className="lg:p-8 p-6">
-                <h3 className="lg:text-3xl font-bold text-white mb-4 text-md">{selectedProject.title}</h3>
-                <p className="text-gray-400 mb-6 lg:text-base text-xs">{selectedProject.description}</p>
+              <div className="p-6 md:p-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{selectedProject.title}</h3>
+                <p className="text-gray-300 mb-5 text-sm md:text-base">{selectedProject.description}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProject.tags.map((tag) => (
-                    <span key={`${selectedProject.id}-${tag}`} className="bg-[#251f38] text-xs font-semibold text-purple-500 rounded-full px-2 py-1">
+                    <span key={`${selectedProject.id}-${tag}`} className="rounded-full border border-white/20 px-2 py-1 text-xs text-purple-300">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-3">
                   <a
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-gray-800 hover:bg-purple-800 text-gray-400 lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    className="rounded-lg border border-white/20 px-4 py-2 text-sm text-slate-200 hover:bg-white/10"
                   >
                     View Code
                   </a>
@@ -66,7 +66,7 @@ const Work = ({ projects }: { projects: ProjectItem[] }) => {
                     href={selectedProject.webapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    className="rounded-lg bg-[#8245ec] px-4 py-2 text-sm font-semibold text-white hover:bg-[#6d37d4]"
                   >
                     View Live
                   </a>

@@ -10,7 +10,7 @@ import Skills from "@/components/Skills";
 import Work from "@/components/Work";
 import { getBlogs, getProjects, getSiteContent } from "@/lib/content";
 
-export const revalidate = false;
+export const dynamic = "force-static";
 
 export default async function HomePage() {
   const [projects, content, blogs] = await Promise.all([getProjects(), getSiteContent(), getBlogs()]);

@@ -29,7 +29,7 @@ const Skills = ({ skills }: { skills: SkillCategory[] }) => (
                   className="flex min-w-0 items-center justify-center gap-2 border-2 border-gray-700 rounded-3xl py-2 px-3 text-center"
                 >
                   <Image src={skill.logo} alt={`${skill.name} logo`} width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
-                  <span className="truncate text-xs sm:text-sm text-gray-300">{skill.name}</span>
+                  <span className="text-xs sm:text-sm text-gray-300">{skill.name}</span>
                 </div>
               ))}
             </div>

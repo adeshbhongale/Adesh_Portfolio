@@ -1,13 +1,11 @@
 "use client";
 
-import { AboutContent, EducationItem, ExperienceItem, SkillCategory } from "@/lib/data";
+import { AboutContent, SkillCategory } from "@/lib/data";
 import { useEffect, useState } from "react";
 
 type ContentPayload = {
   about: AboutContent;
   skills: SkillCategory[];
-  experiences: ExperienceItem[];
-  educations: EducationItem[];
 };
 
 const emptyData: ContentPayload = {
@@ -18,9 +16,7 @@ const emptyData: ContentPayload = {
     cvUrl: "",
     image: ""
   },
-  skills: [],
-  experiences: [],
-  educations: []
+  skills: []
 };
 
 const panelClass = "rounded-2xl border border-white/10 bg-[#120d27] p-5 md:p-6";
@@ -101,7 +97,7 @@ export default function AdminContentPage() {
     <div className="space-y-6 text-white">
       <div className={panelClass}>
         <h1 className="text-2xl font-bold">Content Manager</h1>
-        <p className="mt-2 text-sm text-slate-300">Update about, skills, experience, and education from one place.</p>
+        <p className="mt-2 text-sm text-slate-300">Update about and skills from one place.</p>
       </div>
 
       <section className={panelClass}>
@@ -205,9 +201,9 @@ export default function AdminContentPage() {
                           skills: prev.skills.map((item, index) =>
                             index === categoryIndex
                               ? {
-                                  ...item,
-                                  skills: item.skills.map((skillItem, idx) => (idx === skillIndex ? { ...skillItem, name: event.target.value } : skillItem))
-                                }
+                                ...item,
+                                skills: item.skills.map((skillItem, idx) => (idx === skillIndex ? { ...skillItem, name: event.target.value } : skillItem))
+                              }
                               : item
                           )
                         }))
@@ -223,9 +219,9 @@ export default function AdminContentPage() {
                           skills: prev.skills.map((item, index) =>
                             index === categoryIndex
                               ? {
-                                  ...item,
-                                  skills: item.skills.map((skillItem, idx) => (idx === skillIndex ? { ...skillItem, logo: event.target.value } : skillItem))
-                                }
+                                ...item,
+                                skills: item.skills.map((skillItem, idx) => (idx === skillIndex ? { ...skillItem, logo: event.target.value } : skillItem))
+                              }
                               : item
                           )
                         }))
@@ -261,220 +257,6 @@ export default function AdminContentPage() {
                   Add Skill
                 </button>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={panelClass}>
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold">Experience Section</h2>
-          <button
-            onClick={() =>
-              setData((prev) => ({
-                ...prev,
-                experiences: [
-                  ...prev.experiences,
-                  {
-                    id: Date.now(),
-                    img: "/assets/company_logo/ydcoders.png",
-                    role: "Role",
-                    company: "Company",
-                    date: "2026",
-                    desc: "Description",
-                    skills: ["React"]
-                  }
-                ]
-              }))
-            }
-            className="rounded-lg bg-[#8245ec] px-3 py-2 text-sm hover:bg-[#6d37d4]"
-          >
-            Add Experience
-          </button>
-        </div>
-        <div className="space-y-4">
-          {data.experiences.map((item, index) => (
-            <div key={item.id} className="grid gap-2 rounded-xl border border-white/10 bg-[#1a1236] p-4">
-              <input
-                className={inputClass}
-                value={item.role}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) => (idx === index ? { ...entry, role: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Role"
-              />
-              <input
-                className={inputClass}
-                value={item.company}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) => (idx === index ? { ...entry, company: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Company"
-              />
-              <input
-                className={inputClass}
-                value={item.img}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) => (idx === index ? { ...entry, img: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Image URL"
-              />
-              <input
-                className={inputClass}
-                value={item.date}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) => (idx === index ? { ...entry, date: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Date"
-              />
-              <textarea
-                className={inputClass}
-                value={item.desc}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) => (idx === index ? { ...entry, desc: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Description"
-              />
-              <input
-                className={inputClass}
-                value={item.skills.join(", ")}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((entry, idx) =>
-                      idx === index ? { ...entry, skills: event.target.value.split(",").map((skill) => skill.trim()).filter(Boolean) } : entry
-                    )
-                  }))
-                }
-                placeholder="Skills comma separated"
-              />
-              <button
-                onClick={() => setData((prev) => ({ ...prev, experiences: prev.experiences.filter((_, idx) => idx !== index) }))}
-                className="w-fit rounded-lg bg-rose-700 px-3 py-2 text-sm hover:bg-rose-800"
-              >
-                Delete Experience
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={panelClass}>
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold">Education Section</h2>
-          <button
-            onClick={() =>
-              setData((prev) => ({
-                ...prev,
-                educations: [
-                  ...prev.educations,
-                  {
-                    id: Date.now(),
-                    img: "/assets/education_logo/kit.png",
-                    school: "School",
-                    date: "2026",
-                    grade: "A",
-                    desc: "Description",
-                    degree: "Degree"
-                  }
-                ]
-              }))
-            }
-            className="rounded-lg bg-[#8245ec] px-3 py-2 text-sm hover:bg-[#6d37d4]"
-          >
-            Add Education
-          </button>
-        </div>
-        <div className="space-y-4">
-          {data.educations.map((item, index) => (
-            <div key={item.id} className="grid gap-2 rounded-xl border border-white/10 bg-[#1a1236] p-4">
-              <input
-                className={inputClass}
-                value={item.degree}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, degree: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Degree"
-              />
-              <input
-                className={inputClass}
-                value={item.school}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, school: event.target.value } : entry))
-                  }))
-                }
-                placeholder="School"
-              />
-              <input
-                className={inputClass}
-                value={item.img}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, img: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Image URL"
-              />
-              <input
-                className={inputClass}
-                value={item.date}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, date: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Date"
-              />
-              <input
-                className={inputClass}
-                value={item.grade}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, grade: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Grade"
-              />
-              <textarea
-                className={inputClass}
-                value={item.desc}
-                onChange={(event) =>
-                  setData((prev) => ({
-                    ...prev,
-                    educations: prev.educations.map((entry, idx) => (idx === index ? { ...entry, desc: event.target.value } : entry))
-                  }))
-                }
-                placeholder="Description"
-              />
-              <button
-                onClick={() => setData((prev) => ({ ...prev, educations: prev.educations.filter((_, idx) => idx !== index) }))}
-                className="w-fit rounded-lg bg-rose-700 px-3 py-2 text-sm hover:bg-rose-800"
-              >
-                Delete Education
-              </button>
             </div>
           ))}
         </div>

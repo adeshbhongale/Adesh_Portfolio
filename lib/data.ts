@@ -120,14 +120,23 @@ export const experiencesData: ExperienceItem[] = [
   {
     id: 0,
     img: "/assets/company_logo/ydcoders.png",
-    role: "MERN Stack Developer",
-    company: "YDcoders IT Solution",
-    date: "Jan 2025 - May 2025",
-    desc: "Developed dynamic and scalable web applications using the MERN stack, handling both frontend and backend development. Collaborated with cross-functional teams to build responsive UI, implement RESTful APIs, and optimize application performance in an agile environment.",
-    skills: ["HTML", "CSS", "JavaScript", "React JS", "TypeScript", "Node JS", "Tailwind CSS", "MongoDb", "Redux"]
+    role: "Software Engineer Intern",
+    company: "Univolute Tech Global, Kolhapur, Maharashtra",
+    date: "Sept 2025 - Present",
+    desc: "Developed full-stack applications using Next.js, Payload CMS, Firebase, and GCP to deliver fast, scalable, maintainable product features. Improved project performance by 35% through modular API design, indexed queries, and cost-focused optimizations that reduced infrastructure cost by 50%. Enhanced UI and UX flows with reusable components, responsive layouts, and state-optimized rendering patterns, improving user experience by 22%.",
+    skills: ["Next.js", "Payload CMS", "Firebase", "GCP", "TypeScript", "API Design", "Performance Optimization"]
   },
   {
     id: 1,
+    img: "/assets/company_logo/ydcoders.png",
+    role: "MERN Stack Developer Intern",
+    company: "YDcoders IT Solution, Sangli, Maharashtra",
+    date: "Jan 2025 - May 2025",
+    desc: "Developed and deployed high-quality, scalable MERN stack web applications with efficient workflows. Designed RESTful APIs that improved data retrieval speed by 30% for real-time applications and better performance. Collaborated with frontend teams on modern UI and UX interactions, significantly increasing user engagement by 20%.",
+    skills: ["React JS", "Node JS", "MongoDB", "Express JS", "REST API", "JavaScript", "Tailwind CSS"]
+  },
+  {
+    id: 2,
     img: "/assets/company_logo/oasis.png",
     role: "Web Devloper Intern",
     company: "Oasis InfoByte",
@@ -168,6 +177,32 @@ export const educationData: EducationItem[] = [
 ];
 
 export const projectsData: ProjectItem[] = [
+  {
+    id: 9,
+    title: "Research Lab Platform",
+    description:
+      "Built a static research platform with a Next.js frontend and Payload CMS, enabling a structured flow for publications, team data, and research content. Developed a dynamic News and Media module with video support and multi-role backend access. Delivered responsive high-performance pages optimized with SSG and ISR for strong SEO and speed.",
+    image: "/assets/work_logo/pro.png",
+    tags: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion", "DOI", "Vercel"],
+    github: "https://github.com/adeshbhongale",
+    webapp: "https://example.com",
+    featured: true,
+    techStack: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion"],
+    createdAt: "2025-12-20T00:00:00.000Z"
+  },
+  {
+    id: 10,
+    title: "E-commerce Platform",
+    description:
+      "Built a fully dynamic product-agnostic e-commerce platform using Next.js App Router with SSG and ISR for fast auto-refreshing product pages. Created a real-time admin dashboard for inventory, analytics, and coupon management using Firebase. Integrated Razorpay with secure server-side verification for smooth checkout and automatic order tracking.",
+    image: "/assets/work_logo/eco.png",
+    tags: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
+    github: "https://github.com/adeshbhongale",
+    webapp: "https://example.com",
+    featured: true,
+    techStack: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
+    createdAt: "2025-12-01T00:00:00.000Z"
+  },
   {
     id: 0,
     title: "Eco Place Website",

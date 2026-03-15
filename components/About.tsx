@@ -8,14 +8,14 @@ import { Typewriter } from "react-simple-typewriter";
 
 const About = ({ about }: { about: AboutContent }) => {
   return (
-    <section id="about" className="py-4 px-[6vw] md:px-[7vw] lg:px-[20vw] font-sans mt-10 md:mt-15 lg:mt-20">
+    <section id="about" className="py-4 px-[6vw] md:px-[7vw] lg:px-[15vw] font-sans mt-7 md:mt-10 lg:mt-15">
       <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-10">
-        <div className="relative w-full md:w-1/2 text-center md:text-left mt-2 md:mt-0 md:mr-12">
+        <div className="relative w-full md:w-1/2 text-center md:text-left mt-2 md:mt-0 md:mr-7">
           <div className="relative isolate">
-            <BlurBlob position={{ top: "6%", left: "8%" }} size={{ width: "95%", height: "160px" }} />
-            <BlurBlob position={{ top: "15%", left: "22%" }} size={{ width: "72%", height: "110px" }} />
+            <BlurBlob position={{ top: "20%", left: "35%" }} size={{ width: "35%", height: "35%" }} />
             <div className="relative z-10">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-1 leading-tight">{about.headline}</h1>
+              <h1 className="text-lg sm:text-2xl md:text-4xl font-semibold text-slate-200 mt-2">{about.headline}</h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-1 leading-tight">{about.subheadline}</h1>
             </div>
           </div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-[#8245ec] leading-tight">

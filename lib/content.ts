@@ -59,7 +59,7 @@ export const getProjects = async () => {
     if (!items.length) {
       return projectsData;
     }
-    return items.map((item, index: number) => ({
+    const mappedItems = items.map((item, index: number) => ({
       id: index,
       _id: String(item._id),
       title: item.title,
@@ -72,6 +72,26 @@ export const getProjects = async () => {
       techStack: item.techStack || [],
       createdAt: new Date(item.createdAt).toISOString()
     }));
+    const requiredProjectTitles = ["Research Lab Platform", "E-commerce Platform"];
+    const existingTitles = new Set(mappedItems.map((item) => item.title.trim().toLowerCase()));
+    const requiredProjects = projectsData
+      .filter((item) => requiredProjectTitles.includes(item.title))
+      .filter((item) => !existingTitles.has(item.title.trim().toLowerCase()))
+      .map((item) => ({
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        image: item.image,
+        tags: item.techStack || item.tags,
+        github: item.github,
+        webapp: item.webapp,
+        featured: item.featured,
+        techStack: item.techStack || item.tags,
+        createdAt: item.createdAt
+      }));
+    return [...mappedItems, ...requiredProjects]
+      .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+      .map((item, index) => ({ ...item, id: index }));
   } catch {
     return projectsData;
   }
@@ -101,8 +121,28 @@ export const getBlogs = async () => {
 };
 
 export const getBlogBySlug = async (slug: string) => {
-  const blogs = await getBlogs();
-  return blogs.find((item) => item.slug === slug) || null;
+  try {
+    await connectDB();
+    await seedDatabaseIfEmpty();
+    const item = await Blog.findOne({ slug }).lean<BlogRecord | null>();
+    if (!item) {
+      const blogs = await getBlogs();
+      return blogs.find((entry) => entry.slug === slug) || null;
+    }
+    return {
+      _id: String(item._id),
+      title: item.title,
+      slug: item.slug,
+      content: item.content,
+      excerpt: item.excerpt,
+      coverImage: item.coverImage,
+      tags: item.tags || [],
+      publishedAt: new Date(item.publishedAt).toISOString()
+    };
+  } catch {
+    const blogs = await getBlogs();
+    return blogs.find((entry) => entry.slug === slug) || null;
+  }
 };
 
 export const getSiteContent = async () => {
@@ -118,10 +158,25 @@ export const getSiteContent = async () => {
         educations: educationData
       };
     }
+    const currentExperiences = content.experiences || [];
+    const univoluteTemplate = experiencesData.find((item) => item.company.toLowerCase().includes("univolute"));
+    const hasUnivolute = currentExperiences.some((item) => item.company.toLowerCase().includes("univolute"));
+    const ydcodersIndex = currentExperiences.findIndex((item) => item.company.toLowerCase().includes("ydcoders"));
+    const maxId = currentExperiences.reduce((acc, item) => Math.max(acc, Number(item.id) || 0), 0);
+    const experiences =
+      hasUnivolute || !univoluteTemplate
+        ? currentExperiences
+        : ydcodersIndex >= 0
+          ? [
+              ...currentExperiences.slice(0, ydcodersIndex),
+              { ...univoluteTemplate, id: maxId + 1 },
+              ...currentExperiences.slice(ydcodersIndex)
+            ]
+          : [{ ...univoluteTemplate, id: maxId + 1 }, ...currentExperiences];
     return {
       about: content.about,
       skills: content.skills || [],
-      experiences: content.experiences || [],
+      experiences,
       educations: content.educations || []
     };
   } catch {

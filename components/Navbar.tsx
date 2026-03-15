@@ -36,7 +36,7 @@ const Navbar = () => {
     { id: "experience", label: "Experience", href: isHomePage ? "#experience" : "/#experience" },
     { id: "work", label: "Projects", href: isHomePage ? "#work" : "/#work" },
     { id: "education", label: "Education", href: isHomePage ? "#education" : "/#education" },
-    { id: "blog", label: "Blog", href: "/blog" },
+    { id: "blog", label: "Blog", href: "/#blog" },
     { id: "contact", label: "Contact", href: isHomePage ? "#contact" : "/#contact" }
   ];
 

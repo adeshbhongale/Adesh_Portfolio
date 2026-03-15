@@ -21,7 +21,7 @@ const Footer = () => {
             { name: "Experience", href: isHomePage ? "#experience" : "/#experience" },
             { name: "Projects", href: isHomePage ? "#work" : "/#work" },
             { name: "Education", href: isHomePage ? "#education" : "/#education" },
-            { name: "Blog", href: "/blog" },
+            { name: "Blog", href: "/#blog" },
             { name: "Contact", href: isHomePage ? "#contact" : "/#contact" }
           ].map((item) => (
             <Link key={item.name} href={item.href} className="hover:text-purple-500 text-sm sm:text-base my-1">
