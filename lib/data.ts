@@ -1,3 +1,11 @@
+export type AboutContent = {
+  headline: string;
+  subheadline: string;
+  description: string;
+  cvUrl: string;
+  image: string;
+};
+
 export type SkillCategory = {
   title: string;
   skills: { name: string; logo: string }[];
@@ -25,6 +33,7 @@ export type EducationItem = {
 
 export type ProjectItem = {
   id: number;
+  _id?: string;
   title: string;
   description: string;
   image: string;
@@ -37,6 +46,7 @@ export type ProjectItem = {
 };
 
 export type BlogItem = {
+  _id?: string;
   title: string;
   slug: string;
   content: string;
@@ -44,6 +54,15 @@ export type BlogItem = {
   coverImage: string;
   tags: string[];
   publishedAt: string;
+};
+
+export const aboutData: AboutContent = {
+  headline: "Hi, I am",
+  subheadline: "Adesh Bhongale",
+  description:
+    "I am a Full-stack developer with a passion for building scalable web applications. Skilled in both front-end and back-end development, I specialize in the MERN stack and other modern technologies to create seamless user experiences and efficient solutions.",
+  cvUrl: "https://drive.google.com/file/d/1hdTwJhu3Yl6GxPJsJ5mkSlYbMBJsKsTm/view?usp=drive_link",
+  image: "/assets/Adesh.png"
 };
 
 export const skillsInfo: SkillCategory[] = [
@@ -268,7 +287,7 @@ export const blogData: BlogItem[] = [
     excerpt: "A practical workflow for building scalable MERN projects from planning to deployment.",
     content:
       "I start with clear feature boundaries, then define API contracts, set up reusable UI components, and optimize deployment for performance. A good structure early saves hours later.",
-    coverImage: "/assets/1.jpg",
+    coverImage: "/assets/blog/blog-mern.jpg",
     tags: ["MERN", "Full Stack", "Architecture"],
     publishedAt: "2025-02-10T00:00:00.000Z"
   },
@@ -278,8 +297,28 @@ export const blogData: BlogItem[] = [
     excerpt: "Simple techniques that improve real-world React apps without over-engineering.",
     content:
       "I focus on component boundaries, lazy loading heavy sections, and avoiding unnecessary re-renders. Profiling first, optimization second.",
-    coverImage: "/assets/1.jpg",
+    coverImage: "/assets/blog/blog-react.jpg",
     tags: ["React", "Performance"],
     publishedAt: "2025-03-15T00:00:00.000Z"
+  },
+  {
+    title: "Node.js API Security Patterns for Production Apps",
+    slug: "nodejs-api-security-patterns-for-production-apps",
+    excerpt: "Battle-tested API hardening techniques inspired by OWASP and real-world backend incidents.",
+    content:
+      "Production APIs should combine schema validation, rate limiting, secure headers, and strict auth checks for write operations. This layered strategy reduces attack surface and makes services resilient under malicious traffic and accidental misuse.",
+    coverImage: "/assets/blog/blog-security.jpg",
+    tags: ["Node.js", "Security", "API"],
+    publishedAt: "2025-04-12T00:00:00.000Z"
+  },
+  {
+    title: "Core Web Vitals Playbook for Next.js Websites",
+    slug: "core-web-vitals-playbook-for-nextjs-websites",
+    excerpt: "Practical optimization tactics gathered from Lighthouse guidance and Vercel performance docs.",
+    content:
+      "Start by optimizing image delivery, reducing render-blocking scripts, and splitting large client bundles. In Next.js, combine static rendering with smart caching to keep LCP and INP healthy while maintaining a fast editing workflow in your admin system.",
+    coverImage: "/assets/blog/blog-nextjs.jpg",
+    tags: ["Next.js", "Performance", "SEO"],
+    publishedAt: "2025-05-20T00:00:00.000Z"
   }
 ];

@@ -15,7 +15,7 @@ out
 *.local
 .env.local
 .env.*.local
-!.env
+.env
 
 # Editor directories and files
 .vscode/*
@@ -27,4 +27,3 @@ out
 *.njsproj
 *.sln
 *.sw?
-.env

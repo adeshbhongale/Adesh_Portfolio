@@ -3,8 +3,6 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-export const revalidate = false;
-
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");

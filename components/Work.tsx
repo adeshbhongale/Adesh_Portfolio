@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ProjectItem } from "@/lib/data";
 import ProjectCard from "@/components/ProjectCard";
+import Image from "next/image";
 
 const Work = ({ projects }: { projects: ProjectItem[] }) => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -34,7 +35,13 @@ const Work = ({ projects }: { projects: ProjectItem[] }) => {
 
             <div className="flex flex-col">
               <div className="w-full flex justify-center bg-gray-900 px-4">
-                <img src={selectedProject.image} alt={selectedProject.title} className="lg:w-full w-[95%] object-contain rounded-xl shadow-2xl" />
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  width={1200}
+                  height={800}
+                  className="lg:w-full w-[95%] object-contain rounded-xl shadow-2xl"
+                />
               </div>
               <div className="lg:p-8 p-6">
                 <h3 className="lg:text-3xl font-bold text-white mb-4 text-md">{selectedProject.title}</h3>

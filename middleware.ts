@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAllowedAdmin } from "@/lib/admin";
 
 export function middleware(request: NextRequest) {
   if (!request.nextUrl.pathname.startsWith("/admin") || request.nextUrl.pathname === "/admin/login") {
@@ -6,7 +7,7 @@ export function middleware(request: NextRequest) {
   }
 
   const adminSession = request.cookies.get("admin_session")?.value;
-  if (!adminSession) {
+  if (!adminSession || !isAllowedAdmin(adminSession)) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 

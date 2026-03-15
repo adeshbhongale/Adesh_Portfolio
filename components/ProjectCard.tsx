@@ -1,4 +1,5 @@
 import { ProjectItem } from "@/lib/data";
+import Image from "next/image";
 
 type ProjectCardProps = {
   project: ProjectItem;
@@ -12,7 +13,7 @@ const ProjectCard = ({ project, onSelect }: ProjectCardProps) => {
       className="border border-white bg-gray-900 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden cursor-pointer hover:shadow-purple-500/50 hover:-translate-y-2 transition-transform duration-300 w-full max-w-[500px] mx-auto"
     >
       <div className="p-4">
-        <img src={project.image} alt={project.title} className="w-full h-50 object-cover rounded-xl" />
+        <Image src={project.image} alt={project.title} width={800} height={500} className="w-full h-50 object-cover rounded-xl" />
       </div>
       <div className="p-6">
         <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>

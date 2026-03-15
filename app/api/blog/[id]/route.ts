@@ -1,5 +1,4 @@
 import { isRequestFromAdmin } from "@/lib/admin";
-import { getBlogs } from "@/lib/content";
 import { connectDB, isMongoConfigured } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import { NextResponse } from "next/server";
@@ -15,16 +14,7 @@ const blogSchema = z.object({
   publishedAt: z.string().optional()
 });
 
-export async function GET() {
-  const data = await getBlogs();
-  return NextResponse.json(data, {
-    headers: {
-      "Cache-Control": "s-maxage=31536000, stale-while-revalidate=86400"
-    }
-  });
-}
-
-export async function POST(request: Request) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   if (!isRequestFromAdmin(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
@@ -44,9 +34,32 @@ export async function POST(request: Request) {
       ...parsed.data,
       publishedAt: parsed.data.publishedAt ? new Date(parsed.data.publishedAt) : new Date()
     };
-    const created = await Blog.create(payload);
-    return NextResponse.json(created, { status: 201 });
+    const updated = await Blog.findByIdAndUpdate(params.id, payload, { new: true });
+    if (!updated) {
+      return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+    }
+    return NextResponse.json(updated);
   } catch {
-    return NextResponse.json({ message: "Unable to create blog" }, { status: 500 });
+    return NextResponse.json({ message: "Unable to update blog" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  if (!isRequestFromAdmin(request)) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+  if (!isMongoConfigured()) {
+    return NextResponse.json({ message: "Database is not configured" }, { status: 500 });
+  }
+
+  try {
+    await connectDB();
+    const deleted = await Blog.findByIdAndDelete(params.id);
+    if (!deleted) {
+      return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+    }
+    return NextResponse.json({ message: "Blog deleted" });
+  } catch {
+    return NextResponse.json({ message: "Unable to delete blog" }, { status: 500 });
   }
 }
