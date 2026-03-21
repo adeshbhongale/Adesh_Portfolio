@@ -1,9 +1,12 @@
+import fs from "fs/promises";
 import mongoose from "mongoose";
+import path from "path";
 import { aboutData, blogData, educationData, experiencesData, projectsData, skillsInfo } from "../lib/data";
 import { connectDB } from "../lib/mongodb";
 import Blog from "../models/Blog";
 import Project from "../models/Project";
 import SiteContent from "../models/SiteContent";
+import Upload from "../models/Upload";
 
 const run = async () => {
   await connectDB();
@@ -42,6 +45,31 @@ const run = async () => {
     educations: educationData,
     updatedAt: new Date()
   });
+
+  // Seed images referenced in data into Upload collection
+  const collectImagePaths = new Set<string>();
+  const pushIfAsset = (p?: string) => {
+    if (p && p.startsWith("/assets")) collectImagePaths.add(p);
+  };
+  pushIfAsset(aboutData.image);
+  experiencesData.forEach((e) => pushIfAsset(e.img));
+  educationData.forEach((e) => pushIfAsset(e.img));
+  projectsData.forEach((p) => pushIfAsset(p.image));
+  blogData.forEach((b) => pushIfAsset(b.coverImage));
+
+  if (collectImagePaths.size > 0) {
+    await Upload.deleteMany({});
+    for (const rel of Array.from(collectImagePaths)) {
+      try {
+        const fsPath = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+        const data = await fs.readFile(fsPath);
+        const filename = path.basename(fsPath);
+        await Upload.create({ filename, originalName: filename, contentType: "image/png", data });
+      } catch (err) {
+        // ignore missing files
+      }
+    }
+  }
 
   await mongoose.disconnect();
   process.stdout.write("Database reset and reseed completed.\n");

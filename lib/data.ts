@@ -119,7 +119,7 @@ export const skillsInfo: SkillCategory[] = [
 export const experiencesData: ExperienceItem[] = [
   {
     id: 0,
-    img: "/assets/company_logo/ydcoders.png",
+    img: "/assets/company_logo/univolute.png",
     role: "Software Engineer Intern",
     company: "Univolute Tech Global, Kolhapur, Maharashtra",
     date: "Sept 2025 - Present",
@@ -182,7 +182,7 @@ export const projectsData: ProjectItem[] = [
     title: "Research Lab Platform",
     description:
       "Built a static research platform with a Next.js frontend and Payload CMS, enabling a structured flow for publications, team data, and research content. Developed a dynamic News and Media module with video support and multi-role backend access. Delivered responsive high-performance pages optimized with SSG and ISR for strong SEO and speed.",
-    image: "/assets/work_logo/pro.png",
+    image: "/assets/work_logo/research.png",
     tags: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion", "DOI", "Vercel"],
     github: "https://github.com/adeshbhongale",
     webapp: "https://example.com",
@@ -195,7 +195,7 @@ export const projectsData: ProjectItem[] = [
     title: "E-commerce Platform",
     description:
       "Built a fully dynamic product-agnostic e-commerce platform using Next.js App Router with SSG and ISR for fast auto-refreshing product pages. Created a real-time admin dashboard for inventory, analytics, and coupon management using Firebase. Integrated Razorpay with secure server-side verification for smooth checkout and automatic order tracking.",
-    image: "/assets/work_logo/eco.png",
+    image: "/assets/work_logo/ecom.png",
     tags: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
     github: "https://github.com/adeshbhongale",
     webapp: "https://example.com",

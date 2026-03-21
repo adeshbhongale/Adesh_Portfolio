@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import Upload from "@/models/Upload";
 import { mkdir, writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import path from "path";
@@ -27,6 +29,18 @@ export async function POST(request: Request) {
     const fileName = `${timestamp}-${baseName}.webp`;
     const filePath = path.join(dirPath, fileName);
     await writeFile(filePath, normalizedBuffer);
+
+    // Save a copy into MongoDB for rebuild/CDN restores
+    try {
+      await connectDB();
+      await Upload.findOneAndUpdate(
+        { filename: fileName },
+        { filename: fileName, originalName: file.name, contentType: "image/webp", data: normalizedBuffer },
+        { upsert: true }
+      );
+    } catch {
+      // Don't fail upload if DB save fails; file is still available on disk
+    }
 
     return NextResponse.json({ url: `/api/uploads/${fileName}` });
   } catch {
