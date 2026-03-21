@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import Upload from "@/models/Upload";
 import { mkdir, writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import path from "path";
@@ -23,7 +25,6 @@ export async function POST(request: Request) {
       await mkdir(dirPath, { recursive: true });
     } catch (mkdirError) {
       console.error("Directory creation error:", mkdirError);
-      return NextResponse.json({ message: "Failed to create upload directory" }, { status: 500 });
     }
 
     const fileName = "latest-cv.pdf";
@@ -33,10 +34,23 @@ export async function POST(request: Request) {
       await writeFile(filePath, buffer);
     } catch (writeError) {
       console.error("File write error:", writeError);
-      return NextResponse.json({ message: "Failed to write file to disk" }, { status: 500 });
+      // Don't fail if disk write fails; MongoDB is the backup
     }
 
-    return NextResponse.json({ url: `/assets/cv/${fileName}` });
+    // Save PDF to MongoDB for production/rebuild
+    try {
+      await connectDB();
+      await Upload.findOneAndUpdate(
+        { filename: fileName },
+        { filename: fileName, originalName: file.name, contentType: "application/pdf", data: buffer },
+        { upsert: true }
+      );
+    } catch (dbError) {
+      console.error("Database save error:", dbError);
+      return NextResponse.json({ message: "Failed to save CV to database" }, { status: 500 });
+    }
+
+    return NextResponse.json({ url: `/api/uploads/${fileName}` });
   } catch (error) {
     console.error("CV upload error:", error);
     return NextResponse.json({ message: "Unable to upload PDF" }, { status: 500 });
