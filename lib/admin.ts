@@ -16,7 +16,7 @@ export const isAllowedAdmin = (email: string) => {
   return normalizedAllowedAdmins().includes(normalized);
 };
 
-export const getAdminPassword = () => (process.env.ADMIN_PASSWORD || "Adesh07*@").trim();
+export const getAdminPassword = () => (process.env.ADMIN_PASSWORD || "").trim();
 export const isPasswordValid = (password: string) => password.trim() === getAdminPassword();
 
 export const isRequestFromAdmin = (request: Request) => {

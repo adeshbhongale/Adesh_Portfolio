@@ -43,6 +43,7 @@ export type ProjectItem = {
   featured?: boolean;
   techStack?: string[];
   createdAt?: string;
+  showButtons?: boolean;
 };
 
 export type BlogItem = {
@@ -60,7 +61,7 @@ export const aboutData: AboutContent = {
   headline: "Hi, I am",
   subheadline: "Adesh Bhongale",
   description:
-    "I am a Full-stack developer with a passion for building scalable web applications. Skilled in both front-end and back-end development, I specialize in the MERN stack and other modern technologies to create seamless user experiences and efficient solutions.",
+    "I am a Full-stack developer with a passion for building scalable and high-performance web applications using the MERN stack and Next.js. Skilled in both front-end and back-end development, I focus on modern architectures to deliver seamless user experiences and efficient, production-ready solutions.",
   cvUrl: "https://drive.google.com/file/d/1hdTwJhu3Yl6GxPJsJ5mkSlYbMBJsKsTm/view?usp=drive_link",
   image: "/assets/Adesh.png"
 };
@@ -71,9 +72,10 @@ export const skillsInfo: SkillCategory[] = [
     skills: [
       { name: "HTML", logo: "/assets/tech_logo/html.png" },
       { name: "CSS", logo: "/assets/tech_logo/css.png" },
-      { name: "SASS", logo: "/assets/tech_logo/sass.png" },
       { name: "JavaScript", logo: "/assets/tech_logo/javascript.png" },
+      { name: "TypeScript", logo: "/assets/tech_logo/typescript.png" },
       { name: "React JS", logo: "/assets/tech_logo/reactjs.png" },
+      { name: "Next.js", logo: "/assets/tech_logo/nextjs.png" },
       { name: "Redux", logo: "/assets/tech_logo/redux.png" },
       { name: "Tailwind CSS", logo: "/assets/tech_logo/tailwindcss.png" },
       { name: "Bootstrap", logo: "/assets/tech_logo/bootstrap.png" }
@@ -84,11 +86,13 @@ export const skillsInfo: SkillCategory[] = [
     skills: [
       { name: "Node JS", logo: "/assets/tech_logo/nodejs.png" },
       { name: "Express JS", logo: "/assets/tech_logo/express.png" },
+      { name: "Payload CMS", logo: "/assets/tech_logo/payload_cms.png" },
       { name: "MySQL", logo: "/assets/tech_logo/mysql.png" },
       { name: "MongoDB", logo: "/assets/tech_logo/mongodb.png" },
       { name: "Firebase", logo: "/assets/tech_logo/firebase.png" },
       { name: "PostgreSQL", logo: "/assets/tech_logo/postgre.png" },
-      { name: "AWS", logo: "/assets/tech_logo/aws.png" }
+      { name: "AWS", logo: "/assets/tech_logo/aws.png" },
+      { name: "GCP", logo: "/assets/tech_logo/gcp.png" }
     ]
   },
   {
@@ -98,7 +102,8 @@ export const skillsInfo: SkillCategory[] = [
       { name: "C", logo: "/assets/tech_logo/c.png" },
       { name: "C++", logo: "/assets/tech_logo/cpp.png" },
       { name: "Python", logo: "/assets/tech_logo/python.png" },
-      { name: "JavaScript", logo: "/assets/tech_logo/javascript.png" }
+      { name: "JavaScript", logo: "/assets/tech_logo/javascript.png" },
+      { name: "TypeScript", logo: "/assets/tech_logo/typescript.png" }
     ]
   },
   {
@@ -178,32 +183,6 @@ export const educationData: EducationItem[] = [
 
 export const projectsData: ProjectItem[] = [
   {
-    id: 9,
-    title: "Research Lab Platform",
-    description:
-      "Built a static research platform with a Next.js frontend and Payload CMS, enabling a structured flow for publications, team data, and research content. Developed a dynamic News and Media module with video support and multi-role backend access. Delivered responsive high-performance pages optimized with SSG and ISR for strong SEO and speed.",
-    image: "/assets/work_logo/research.png",
-    tags: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion", "DOI", "Vercel"],
-    github: "https://github.com/adeshbhongale",
-    webapp: "https://example.com",
-    featured: true,
-    techStack: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion"],
-    createdAt: "2025-12-20T00:00:00.000Z"
-  },
-  {
-    id: 10,
-    title: "E-commerce Platform",
-    description:
-      "Built a fully dynamic product-agnostic e-commerce platform using Next.js App Router with SSG and ISR for fast auto-refreshing product pages. Created a real-time admin dashboard for inventory, analytics, and coupon management using Firebase. Integrated Razorpay with secure server-side verification for smooth checkout and automatic order tracking.",
-    image: "/assets/work_logo/ecom.png",
-    tags: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
-    github: "https://github.com/adeshbhongale",
-    webapp: "https://example.com",
-    featured: true,
-    techStack: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
-    createdAt: "2025-12-01T00:00:00.000Z"
-  },
-  {
     id: 0,
     title: "Eco Place Website",
     description:
@@ -214,7 +193,8 @@ export const projectsData: ProjectItem[] = [
     webapp: "https://eco-place-cyan.vercel.app/",
     featured: true,
     techStack: ["React Js", "Node Js", "MongoDB", "Express Js"],
-    createdAt: "2025-01-01T00:00:00.000Z"
+    createdAt: "2025-01-01T00:00:00.000Z",
+    showButtons: false
   },
   {
     id: 1,
@@ -227,7 +207,8 @@ export const projectsData: ProjectItem[] = [
     webapp: "https://pro-manage-tasks.vercel.app/",
     featured: true,
     techStack: ["React Js", "Node Js", "MongoDB", "Express Js"],
-    createdAt: "2024-11-01T00:00:00.000Z"
+    createdAt: "2024-11-01T00:00:00.000Z",
+    showButtons: false
   },
   {
     id: 2,
@@ -240,6 +221,34 @@ export const projectsData: ProjectItem[] = [
     webapp: "https://ai-cover-letter-generator-blush.vercel.app/",
     techStack: ["React Js", "Gemini API"],
     createdAt: "2024-09-01T00:00:00.000Z"
+  },
+  {
+    id: 9,
+    title: "Research Lab Platform",
+    description:
+      "Built a static research platform with a Next.js frontend and Payload CMS, enabling a structured flow for publications, team data, and research content. Developed a dynamic News and Media module with video support and multi-role backend access. Delivered responsive high-performance pages optimized with SSG and ISR for strong SEO and speed.",
+    image: "/assets/work_logo/research.png",
+    tags: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion", "DOI", "Vercel"],
+    github: "https://github.com/adeshbhongale",
+    webapp: "https://example.com",
+    featured: true,
+    techStack: ["Next.js", "Payload CMS", "PostgreSQL", "Tailwind CSS", "Framer Motion"],
+    createdAt: "2025-12-20T00:00:00.000Z",
+    showButtons: false
+  },
+  {
+    id: 10,
+    title: "E-commerce Platform",
+    description:
+      "Built a fully dynamic product-agnostic e-commerce platform using Next.js App Router with SSG and ISR for fast auto-refreshing product pages. Created a real-time admin dashboard for inventory, analytics, and coupon management using Firebase. Integrated Razorpay with secure server-side verification for smooth checkout and automatic order tracking.",
+    image: "/assets/work_logo/ecom.png",
+    tags: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
+    github: "https://github.com/adeshbhongale",
+    webapp: "https://example.com",
+    featured: true,
+    techStack: ["Next.js", "Firebase", "Razorpay", "Tailwind CSS", "Framer Motion", "GCP"],
+    createdAt: "2025-12-01T00:00:00.000Z",
+    showButtons: false
   },
   {
     id: 3,

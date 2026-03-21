@@ -91,7 +91,13 @@ export const getProjects = async () => {
         createdAt: item.createdAt
       }));
     return [...mappedItems, ...requiredProjects]
-      .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+      .sort((a, b) => {
+        // Sort featured projects first
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        // Then sort by createdAt descending
+        return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+      })
       .map((item, index) => ({ ...item, id: index }));
   } catch {
     return projectsData;
@@ -169,10 +175,10 @@ export const getSiteContent = async () => {
         ? currentExperiences
         : ydcodersIndex >= 0
           ? [
-              ...currentExperiences.slice(0, ydcodersIndex),
-              { ...univoluteTemplate, id: maxId + 1 },
-              ...currentExperiences.slice(ydcodersIndex)
-            ]
+            ...currentExperiences.slice(0, ydcodersIndex),
+            { ...univoluteTemplate, id: maxId + 1 },
+            ...currentExperiences.slice(ydcodersIndex)
+          ]
           : [{ ...univoluteTemplate, id: maxId + 1 }, ...currentExperiences];
     return {
       about: {

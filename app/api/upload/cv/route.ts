@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
+import path from "path";
 
 export async function POST(request: Request) {
   try {
@@ -18,13 +18,27 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const dirPath = path.join(process.cwd(), "public", "assets", "cv");
-    await mkdir(dirPath, { recursive: true });
+
+    try {
+      await mkdir(dirPath, { recursive: true });
+    } catch (mkdirError) {
+      console.error("Directory creation error:", mkdirError);
+      return NextResponse.json({ message: "Failed to create upload directory" }, { status: 500 });
+    }
+
     const fileName = "latest-cv.pdf";
     const filePath = path.join(dirPath, fileName);
-    await writeFile(filePath, buffer);
+
+    try {
+      await writeFile(filePath, buffer);
+    } catch (writeError) {
+      console.error("File write error:", writeError);
+      return NextResponse.json({ message: "Failed to write file to disk" }, { status: 500 });
+    }
 
     return NextResponse.json({ url: `/assets/cv/${fileName}` });
-  } catch {
+  } catch (error) {
+    console.error("CV upload error:", error);
     return NextResponse.json({ message: "Unable to upload PDF" }, { status: 500 });
   }
 }

@@ -41,88 +41,123 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10"}`}
-    >
-      <div className="text-white py-4 flex justify-between items-center">
-        <Link href="/" className="text-lg font-semibold cursor-pointer">
-          <span className="text-[#8245ec] text-2xl">&lt;</span>
-          <span className="text-white text-2xl">Adesh</span>
-          <span className="text-[#8245ec] text-2xl">/</span>
-          <span className="text-white text-2xl">Bhongale</span>
-          <span className="text-[#8245ec] text-2xl">&gt;</span>
-        </Link>
+    <>
+      <nav
+        className={`fixed top-0 w-full z-50 transition duration-300 px-4 sm:px-6 md:px-[7vw] lg:px-[20vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10"
+          }`}
+      >
+        <div className="text-white py-3 sm:py-4 flex justify-between items-center">
+          <Link href="/" className="text-lg font-semibold cursor-pointer">
+            <span className="text-[#8245ec] text-xl sm:text-2xl">&lt;</span>
+            <span className="text-white text-lg sm:text-2xl">Adesh</span>
+            <span className="text-[#8245ec] text-xl sm:text-2xl">/</span>
+            <span className="text-white text-lg sm:text-2xl">Bhongale</span>
+            <span className="text-[#8245ec] text-xl sm:text-2xl">&gt;</span>
+          </Link>
 
-        <ul className="hidden md:flex space-x-8 text-gray-300">
-          {menuItems.map((item) => (
-            <li key={item.id} className="cursor-pointer">
-              <Link onClick={handleMenuItemClick} href={item.href} className="hover:text-[#8245ec]">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden md:flex space-x-4">
-          <a
-            href="https://github.com/adeshbhongale"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaGithub size={24} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaLinkedin size={24} />
-          </a>
-        </div>
-
-        <div className="md:hidden">
-          {isOpen ? (
-            <FiX className="text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(false)} />
-          ) : (
-            <FiMenu className="text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(true)} />
-          )}
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
+          <ul className="hidden md:flex space-x-8 text-gray-300">
             {menuItems.map((item) => (
-              <li key={item.id} className="cursor-pointer hover:text-white">
-                <Link href={item.href} onClick={handleMenuItemClick}>
+              <li key={item.id} className="cursor-pointer">
+                <Link
+                  onClick={handleMenuItemClick}
+                  href={item.href}
+                  className="hover:text-[#8245ec] transition-colors duration-300 relative group"
+                >
+                  {item.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden md:flex space-x-4">
+            <a
+              href="https://github.com/adeshbhongale"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaGithub size={24} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaLinkedin size={24} />
+            </a>
+          </div>
+
+          <div className="md:hidden">
+            {isOpen ? (
+              <FiX className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(false)} />
+            ) : (
+              <FiMenu className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(true)} />
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 top-16 z-40 md:hidden bg-gradient-to-b from-[#050414]/95 to-[#0a0822]/95 backdrop-blur-lg"
+          onClick={() => setIsOpen(false)}
+        >
+          <ul className="flex flex-col items-center space-y-2 pt-6 pb-8 text-gray-300">
+            {menuItems.map((item, index) => (
+              <li key={item.id} className="w-full">
+                <Link
+                  href={item.href}
+                  onClick={handleMenuItemClick}
+                  className="block px-6 py-3 text-center hover:text-white hover:bg-purple-500/10 transition-all duration-300 rounded-lg border-b border-white/5"
+                  style={{
+                    animation: `slideIn 0.3s ease-out forwards`,
+                    animationDelay: `${index * 50}ms`,
+                    opacity: 0
+                  }}
+                >
                   {item.label}
                 </Link>
               </li>
             ))}
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/adeshbhongale"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaLinkedin size={24} />
-              </a>
-            </div>
+            <li className="w-full pt-4 border-t border-white/10">
+              <div className="flex justify-center gap-6 py-4">
+                <a
+                  href="https://github.com/adeshbhongale"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-gray-300 hover:text-[#8245ec] transition-all duration-300 transform hover:scale-110 p-2 rounded-lg hover:bg-purple-500/10"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-gray-300 hover:text-[#8245ec] transition-all duration-300 transform hover:scale-110 p-2 rounded-lg hover:bg-purple-500/10"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+              </div>
+            </li>
           </ul>
+          <style jsx>{`
+            @keyframes slideIn {
+              from {
+                opacity: 0;
+                transform: translateX(-20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateX(0);
+              }
+            }
+          `}</style>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

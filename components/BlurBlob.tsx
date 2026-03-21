@@ -8,11 +8,12 @@ const BlurBlob = ({ position, size }: BlurBlobProps) => {
     <div
       className="absolute"
       style={{
-        top: position?.top || "20%",
-        left: position?.left || "35%",
-        width: size?.width || "35%",
-        height: size?.height || "35%",
-        transform: "translate(-50%)"
+        top: position?.top || "0%",
+        left: position?.left || "50%",
+        width: size?.width || "50%",
+        height: size?.height || "50%",
+        transform: "translate(-50%, -50%)",
+        pointerEvents: "none"
       }}
     >
       <div className="w-full h-full bg-purple-500 rounded-full opacity-3 blur-3xl animate-pulse"></div>
