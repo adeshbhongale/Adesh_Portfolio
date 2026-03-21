@@ -4,5 +4,3 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[context.production.environment]
-  NEXT_PUBLIC_SITE_URL = "https://adesh-portfolio.netlify.app"
