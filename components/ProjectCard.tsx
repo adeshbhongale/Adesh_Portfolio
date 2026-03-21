@@ -10,10 +10,10 @@ const ProjectCard = ({ project, onSelect }: ProjectCardProps) => {
   return (
     <div
       onClick={() => onSelect(project)}
-      className="group relative border border-white/30 bg-gradient-to-br from-gray-900 to-gray-950 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden cursor-pointer hover:shadow-purple-500/50 hover:-translate-y-3 hover:border-purple-500/50 transition-all duration-500 w-full min-w-[500px] max-w-[500px] hover:scale-105"
+      className="group relative border border-white/30 bg-gradient-to-br from-gray-900 to-gray-950 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:border-purple-500/50 transition-all duration-500 w-full min-w-[500px] max-w-[500px] hover:scale-105"
     >
       {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-purple-600/0 group-hover:from-purple-600/10 group-hover:to-purple-600/20 transition-all duration-500 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-purple-600/0 transition-all duration-500 z-10"></div>
 
       {/* Image Container */}
       <div className="p-4 relative overflow-hidden bg-[#0e0b1f]">
@@ -23,7 +23,7 @@ const ProjectCard = ({ project, onSelect }: ProjectCardProps) => {
           width={800}
           height={500}
           unoptimized
-          className="w-full h-50 object-cover rounded-xl group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-50 object-contain rounded-xl transition-transform duration-700"
         />
         {/* Image overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

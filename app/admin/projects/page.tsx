@@ -34,7 +34,11 @@ export default function AdminProjectsPage() {
     const response = await fetch("/api/projects");
     const data = await response.json();
     if (response.ok) {
-      setProjects(data);
+      const normalizedData = data.map((project: ProjectPayload) => ({
+        ...project,
+        featured: Boolean(project.featured)
+      }));
+      setProjects(normalizedData);
     }
   };
 
@@ -289,7 +293,7 @@ export default function AdminProjectsPage() {
               <label className="flex items-center gap-2 text-sm text-slate-300">
                 <input
                   type="checkbox"
-                  checked={Boolean(project.featured)}
+                  checked={project.featured === true}
                   onChange={(event) =>
                     setProjects((prev) => prev.map((item, idx) => (idx === index ? { ...item, featured: event.target.checked } : item)))
                   }
