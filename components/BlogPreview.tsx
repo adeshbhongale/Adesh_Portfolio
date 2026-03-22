@@ -8,7 +8,7 @@ const BlogPreview = ({ blogs }: { blogs: BlogItem[] }) => {
   const latestPosts = blogs.slice(0, 3);
 
   return (
-    <section id="blog" className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans">
+    <section id="blog" className="py-20 pb-20 px-[12vw] md:px-[7vw] lg:px-[15vw] font-sans">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-white">LATEST BLOGS</h2>
         <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4"></div>

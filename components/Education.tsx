@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Education = ({ educations }: { educations: EducationItem[] }) => {
   return (
-    <section id="education" className="py-24 pb-24 px-4 md:px-[7vw] lg:px-[20vw] font-sans">
+    <section id="education" className="py-20 pb-20 px-4 md:px-[7vw] lg:px-[15vw] font-sans">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold text-white">EDUCATION</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4"></div>

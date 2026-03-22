@@ -13,7 +13,7 @@ const Skills = ({ skills }: { skills: SkillCategory[] }) => {
   }, []);
 
   return (
-    <section id="skills" className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans relative overflow-hidden">
+    <section id="skills" className="py-20 pb-20 px-[12vw] md:px-[7vw] lg:px-[15vw] font-sans relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>

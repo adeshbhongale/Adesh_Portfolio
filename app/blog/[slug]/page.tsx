@@ -73,8 +73,15 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
               </span>
             ))}
           </div>
-          <Image src={post.coverImage} alt={post.title} width={800} height={300} unoptimized className="mb-10 h-auto w-full rounded-2xl object-cover" />
-          <div className="space-y-5 text-lg leading-relaxed text-gray-200">
+          <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] mb-10">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              unoptimized
+              className="rounded-2xl object-cover"
+            />
+          </div>          <div className="space-y-5 text-lg leading-relaxed text-gray-200">
             {post.content
               .split("\n")
               .filter((line) => line.trim().length > 0)
@@ -83,8 +90,8 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
               ))}
           </div>
         </article>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

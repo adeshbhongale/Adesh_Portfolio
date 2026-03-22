@@ -10,14 +10,14 @@ const Footer = () => {
   const isHomePage = pathname === "/";
 
   return (
-    <footer className="text-white py-16 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans border-t border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-transparent">
+    <footer className="text-white py-12 px-[5vw] md:px-[7vw] lg:px-[10vw] font-sans border-t border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Brand */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex flex-col items-center md:items-center">
             <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Adesh Bhongale</h2>
-            <p className="text-gray-400 text-sm mt-2">Full-stack developer specializing in MERN and Next.js, high-performance, building scalable web applications with seamless user experiences</p>
+            <p className="text-gray-400 text-sm mt-2 text-center">Full-stack developer specializing in MERN & Next.js, high-performance, building scalable web applications.</p>
           </div>
 
           {/* Quick Links */}
@@ -29,7 +29,8 @@ const Footer = () => {
                 { name: "Skills", href: isHomePage ? "#skills" : "/#skills" },
                 { name: "Projects", href: isHomePage ? "#work" : "/#work" },
                 { name: "Blog", href: "/#blog" },
-                { name: "Contact", href: isHomePage ? "#contact" : "/#contact" }
+                { name: "Experience", href: isHomePage ? "#experience" : "/#experience" },
+                { name: "Education", href: isHomePage ? "#education" : "/#education" },
               ].map((item) => (
                 <Link
                   key={item.name}
@@ -46,7 +47,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex flex-col items-center md:items-center">
             <h3 className="text-lg font-semibold text-white mb-4">Connect</h3>
-            <div className="flex flex-wrap justify-center md:justify-end gap-4">
+            <div className="flex flex-wrap justify-center md:justify-center gap-4">
               {[
                 { icon: <FaGithub />, link: "https://github.com/adeshbhongale", label: "GitHub" },
                 { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/adesh-bhongale-58830025b", label: "LinkedIn" },
@@ -75,7 +76,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Adesh Bhongale. All rights reserved.</p>
-          <p className="text-center md:text-right">Crafted with <span className="text-pink-500">♥</span> using Next.js, TypeScript & Tailwind CSS</p>
+          <p className="text-center md:text-right">Crafted with Devloper Adesh <span className="text-pink-500">♥</span> using Next.js, TypeScript & Tailwind CSS</p>
         </div>
       </div>
     </footer>

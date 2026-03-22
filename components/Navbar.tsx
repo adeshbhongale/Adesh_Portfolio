@@ -43,58 +43,64 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition duration-300 px-4 sm:px-6 md:px-[7vw] lg:px-[20vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10"
+        className={`fixed top-0 w-full z-50 transition duration-300 px-4 sm:px-6 md:px-[7vw] lg:px-[15vw] ${isScrolled ? "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10" : "bg-[#050414]/85 backdrop-blur-lg border-b border-white/10"
           }`}
       >
-        <div className="text-white py-3 sm:py-4 flex justify-between items-center">
-          <Link href="/" className="text-lg font-semibold cursor-pointer">
-            <span className="text-[#8245ec] text-xl sm:text-2xl">&lt;</span>
-            <span className="text-white text-lg sm:text-2xl">Adesh</span>
-            <span className="text-[#8245ec] text-xl sm:text-2xl">/</span>
-            <span className="text-white text-lg sm:text-2xl">Bhongale</span>
-            <span className="text-[#8245ec] text-xl sm:text-2xl">&gt;</span>
-          </Link>
+        <div className="text-white py-3 sm:py-4 flex justify-center items-center">
+          <div className="flex justify-between items-center gap-3 sm:gap-4 lg:gap-6 w-full">
+            {/* Logo */}
+            <Link href="/" className="text-lg font-semibold cursor-pointer flex-shrink-0 whitespace-nowrap">
+              <span className="text-[#8245ec] text-xl sm:text-2xl">&lt;</span>
+              <span className="text-white text-lg sm:text-2xl">Adesh</span>
+              <span className="text-[#8245ec] text-xl sm:text-2xl">/</span>
+              <span className="text-white text-lg sm:text-2xl">Bhongale</span>
+              <span className="text-[#8245ec] text-xl sm:text-2xl">&gt;</span>
+            </Link>
 
-          <ul className="hidden md:flex space-x-8 text-gray-300">
-            {menuItems.map((item) => (
-              <li key={item.id} className="cursor-pointer">
-                <Link
-                  onClick={handleMenuItemClick}
-                  href={item.href}
-                  className="hover:text-[#8245ec] transition-colors duration-300 relative group"
-                >
-                  {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+            {/* Menu Items - Center */}
+            <ul className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 text-gray-300 flex-1 justify-center px-4">
+              {menuItems.map((item) => (
+                <li key={item.id} className="cursor-pointer">
+                  <Link
+                    onClick={handleMenuItemClick}
+                    href={item.href}
+                    className="hover:text-[#8245ec] transition-colors duration-300 relative group whitespace-nowrap text-sm lg:text-base"
+                  >
+                    {item.label}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          <div className="hidden md:flex space-x-4">
-            <a
-              href="https://github.com/adeshbhongale"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110"
-            >
-              <FaGithub size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110"
-            >
-              <FaLinkedin size={24} />
-            </a>
-          </div>
+            {/* Social Icons - Right */}
+            <div className="hidden md:flex space-x-2 lg:space-x-3 items-center flex-shrink-0">
+              <a
+                href="https://github.com/adeshbhongale"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110 p-1.5 lg:p-2 rounded-lg hover:bg-purple-500/10"
+              >
+                <FaGithub size={20} className="lg:w-6 lg:h-6" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/adesh-bhongale-58830025b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 transform hover:scale-110 p-1.5 lg:p-2 rounded-lg hover:bg-purple-500/10"
+              >
+                <FaLinkedin size={20} className="lg:w-6 lg:h-6" />
+              </a>
+            </div>
 
-          <div className="md:hidden">
-            {isOpen ? (
-              <FiX className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(false)} />
-            ) : (
-              <FiMenu className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(true)} />
-            )}
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden ml-auto flex-shrink-0">
+              {isOpen ? (
+                <FiX className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(false)} />
+              ) : (
+                <FiMenu className="text-2xl sm:text-3xl text-[#8245ec] cursor-pointer" onClick={() => setIsOpen(true)} />
+              )}
+            </div>
           </div>
         </div>
       </nav>

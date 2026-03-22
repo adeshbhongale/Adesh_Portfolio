@@ -16,7 +16,7 @@ const Work = ({ projects }: { projects: ProjectItem[] }) => {
   }, []);
 
   return (
-    <section id="work" className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans relative overflow-hidden">
+    <section id="work" className="py-20 pb-20 px-[12vw] md:px-[7vw] lg:px-[14vw] font-sans relative overflow-hidden">
       {/* Animated Title Section */}
       <div className="text-center mb-16" ref={containerRef}>
         <h2
