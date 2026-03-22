@@ -9,13 +9,26 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/"
   },
-  keywords: [
-    "Adesh Bhongale",
-    "MERN Stack Developer",
-    "Full Stack Developer",
-    "Portfolio",
-    "Next.js"
+  keywords: defaultSEO.keywords,
+  authors: [
+    {
+      name: "Adesh Bhongale",
+      url: defaultSEO.canonical
+    }
   ],
+  creator: "Adesh Bhongale",
+  publisher: "Adesh Bhongale",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  },
   openGraph: {
     title: defaultSEO.openGraph.title,
     description: defaultSEO.openGraph.description,
@@ -27,7 +40,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: defaultSEO.openGraph.title,
-    description: defaultSEO.openGraph.description
+    description: defaultSEO.openGraph.description,
+    creator: "@adesh_bhongale"
+  },
+  verification: {
+    google: "google-site-verification"
   }
 };
 

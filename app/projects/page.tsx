@@ -2,8 +2,31 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Work from "@/components/Work";
 import { getProjects } from "@/lib/content";
+import type { Metadata } from "next";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "Projects | Adesh Bhongale | Full Stack Developer Portfolio",
+  description:
+    "Explore Adesh Bhongale's portfolio projects - Full Stack & MERN applications showcasing expertise in Next.js, React, Node.js, and modern web development.",
+  keywords: [
+    "Adesh Bhongale Projects",
+    "Portfolio Projects",
+    "Full Stack Projects",
+    "MERN Projects",
+    "Web Development Projects",
+    "Next.js Projects",
+    "React Projects",
+    "Development Showcase"
+  ],
+  openGraph: {
+    title: "Projects | Adesh Bhongale Portfolio",
+    description:
+      "Discover Adesh Bhongale's portfolio of full stack web development projects built with latest technologies.",
+    type: "website"
+  }
+};
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
